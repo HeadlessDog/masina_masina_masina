@@ -6,8 +6,27 @@ public class masinuVeidosana {
 	
 	static int masinuSk = 0;
 	
-	static void taisitMasinu(String marka, String modelis, String krasa, int maxAtrums, int incAtrums)
+	static void parTaisitMasinu(int masinaIdx, String[] krasas)
 	{
+		String[] darbibas = {"Krasa", "Maks. ātrums", "Akselerācija"};
+		masinka OldMasina = Vaditajs.masinas.get(masinaIdx);
+		
+		
+		String darbiba = (String)JOptionPane.showInputDialog(null, "Ko gribi paraisit?", "Garāža", JOptionPane.INFORMATION_MESSAGE, null, darbibas, darbibas[0]);
+		
+		switch(darbiba) {
+		case "Krasa": String krasa = (String)JOptionPane.showInputDialog(null, "Kadu krasu gribi?", "Auto dīlers",
+				JOptionPane.QUESTION_MESSAGE, null, krasas, krasas[0]);
+					Vaditajs.masinas.set(masinaIdx, new masinka(OldMasina.marka, OldMasina.modelis, krasa, OldMasina.maxAtrums, OldMasina.incAtrums, OldMasina.notriektiCilv));
+					break;
+		case "Maks. ātrums": int maxAtr = Vaditajs.IntParb("Ievadi mašīnas vēlamo maksimālo ātrumu(45 - 200 km/h):", 45, 200);	
+					Vaditajs.masinas.set(masinaIdx, new masinka(OldMasina.marka, OldMasina.modelis, OldMasina.krasa, maxAtr, OldMasina.incAtrums, OldMasina.notriektiCilv));
+					break;
+		case "Akselerācija": int incAtr = Vaditajs.IntParb("Ievadi mašīnas vēlamo maksimālo ātrumu(45 - 200 km/h):", 45, 200);	
+		Vaditajs.masinas.set(masinaIdx, new masinka(OldMasina.marka, OldMasina.modelis, OldMasina.krasa, OldMasina.maxAtrums, incAtr, OldMasina.notriektiCilv));
+		break;
+		default: JOptionPane.showMessageDialog(null, "Kļūda, pārtaisīšana atcelta!", "Kļūda", JOptionPane.ERROR_MESSAGE); break;
+		}
 		
 	}
 	
@@ -23,9 +42,7 @@ public class masinuVeidosana {
 		
 		String modelis = Vaditajs.StringParb("Ievadi mašīnas modeli:");
 		
-		Vaditajs.masinas.add(new masinka(marka, modelis, krasa, maxAtr, incAtr));
-		
-		
+		Vaditajs.masinas.add(new masinka(marka, modelis, krasa, maxAtr, incAtr, 0));
 		
 	}
 

@@ -82,21 +82,46 @@ public class Vaditajs {
 					JOptionPane.showMessageDialog(null, "Tu aizej uz garāžu...", "Staigā", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				}
+				break;
 			case "garaza":
 				int masinuSk = masinas.size();
 				
-				String[] masinuNosaukumi = new String[masinuSk+1];
+				String[] masinuNosaukumi = new String[masinuSk];
+				String[] darbibuOpcijas = new String[masinuSk+2];
 				
 				if(masinuSk != 0)
 					for(int i =0;i<masinuSk;i++)
 						masinuNosaukumi[i] = masinas.get(i).marka+" "+masinas.get(i).modelis;
 				
-				masinuNosaukumi[masinuSk] = "Iet atpakaļ pie dīlera";
+				for(int i=0;i<masinuSk;i++)
+					darbibuOpcijas[i] = masinuNosaukumi[i];
+
+				darbibuOpcijas[masinuSk+1] = "Iet atpakaļ pie dīlera";
+				darbibuOpcijas[masinuSk] = "Pārtaisīt kādu mašīnu";
 					
-				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena), vari arī iet atpakāl pie dīlera", "Auto Dīleris", JOptionPane.INFORMATION_MESSAGE, null, masinuNosaukumi, masinuNosaukumi[0]);
+				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena), vari arī iet atpakāl pie dīlera", "Auto Dīleris", JOptionPane.INFORMATION_MESSAGE, null, darbibuOpcijas, darbibuOpcijas[0]);
 				
 				if(izvele == "Iet atpakaļ pie dīlera") {
+					JOptionPane.showMessageDialog(null, "Tu aizej uz auto dīleri...", "Staigā", JOptionPane.INFORMATION_MESSAGE);
 					vieta = "dealer";
+					continue;
+				}
+				else if(izvele == "Pārtaisīt kādu mašīnu")
+				{
+					if(masinuSk == 0) {
+						JOptionPane.showMessageDialog(null, "Tev nav mašīnu ko pārtaisīt!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+						continue;
+					}
+					int masinaIdx = -1;
+					String masina = (String)JOptionPane.showInputDialog(null, "Kuru mašīnu gribi pārtaisīt?", "Garāža", JOptionPane.INFORMATION_MESSAGE, null, masinuNosaukumi, masinuNosaukumi[0]);
+					
+					for(int i=0;i<masinuSk;i++) {
+						if(masinuNosaukumi[i].equals(masina)) {
+							masinaIdx = i;
+							break;
+						}	
+					}
+					if(masinaIdx > -1) masinuVeidosana.parTaisitMasinu(masinaIdx, pieejKrasas);
 					continue;
 				}
 				else currentMasina = izvele;

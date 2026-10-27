@@ -10,12 +10,13 @@ public class masinka {
 	String modelis;
 	String krasa;
 	
-	public masinka(String marka, String modelis, String krasa, int maxAtrums, int incAtrums) {
+	public masinka(String marka, String modelis, String krasa, int maxAtrums, int incAtrums, int notriektiCilv) {
 		this.marka = marka;
 		this.modelis = modelis;
 		this.krasa = krasa;
 		this.maxAtrums = maxAtrums;
 		this.incAtrums = incAtrums;
+		this.notriektiCilv = notriektiCilv;
 	}
 	
 	void paatrinat() {
