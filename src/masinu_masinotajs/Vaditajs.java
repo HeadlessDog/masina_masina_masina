@@ -45,7 +45,7 @@ public class Vaditajs {
 			
 			virkne = virkne.trim();
 			
-			if(Pattern.matches("^[\\p{L} ]+$", virkne))
+			if(Pattern.matches("^[\\p{L}\\p{N} ]+$", virkne))
 				valid = true;
 			else valid = false;
 			
@@ -82,6 +82,7 @@ public class Vaditajs {
 					vieta = "garaza";
 					JOptionPane.showMessageDialog(null, "Tu aizej uz garāžu...", "Staigā", JOptionPane.INFORMATION_MESSAGE);
 					break;
+				default: System.exit(0); break;
 				}
 				break;
 			case "garaza":
@@ -123,9 +124,11 @@ public class Vaditajs {
 						}	
 					}
 					if(masinaIdx > -1) masinuVeidosana.parTaisitMasinu(masinaIdx, pieejKrasas);
+					else System.exit(0);
 					continue;
 					
 				}
+				else if(izvele == null) System.exit(0);
 				else {
 					currentMasinaName = izvele;
 					currentMasinaRef = null;

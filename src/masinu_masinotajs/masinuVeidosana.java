@@ -22,7 +22,7 @@ public class masinuVeidosana {
 		case "Maks. ātrums": int maxAtr = Vaditajs.IntParb("Ievadi mašīnas vēlamo maksimālo ātrumu(45 - 200 km/h):", 45, 200);	
 					Vaditajs.masinas.set(masinaIdx, new masinka(OldMasina.marka, OldMasina.modelis, OldMasina.krasa, maxAtr, OldMasina.incAtrums, OldMasina.notriektiCilv));
 					break;
-		case "Akselerācija": int incAtr = Vaditajs.IntParb("Ievadi mašīnas vēlamo maksimālo ātrumu(45 - 200 km/h):", 45, 200);	
+		case "Akselerācija": int incAtr = Vaditajs.IntParb("Ievadi mašīnas akselerāciju(par cik tā pāātrinās katru reizi piespiežot pedāli) (5 - 75 km/h):", 5, 75);
 		Vaditajs.masinas.set(masinaIdx, new masinka(OldMasina.marka, OldMasina.modelis, OldMasina.krasa, OldMasina.maxAtrums, incAtr, OldMasina.notriektiCilv));
 		break;
 		default: JOptionPane.showMessageDialog(null, "Kļūda, pārtaisīšana atcelta!", "Kļūda", JOptionPane.ERROR_MESSAGE); break;
