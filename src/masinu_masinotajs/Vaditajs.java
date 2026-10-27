@@ -101,7 +101,7 @@ public class Vaditajs {
 				darbibuOpcijas[masinuSk+1] = "Iet atpakaļ pie dīlera";
 				darbibuOpcijas[masinuSk] = "Pārtaisīt kādu mašīnu";
 					
-				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena).\n Vari arī iet atpakāļ pie dīlera vai pārtaisīt kādu mašīnu.", "Auto Dīleris", JOptionPane.INFORMATION_MESSAGE, null, darbibuOpcijas, darbibuOpcijas[0]);
+				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena).\n Vari arī iet atpakāļ pie dīlera vai pārtaisīt kādu mašīnu.", "Garaza", JOptionPane.INFORMATION_MESSAGE, null, darbibuOpcijas, darbibuOpcijas[0]);
 				
 				if(izvele == "Iet atpakaļ pie dīlera") {
 					JOptionPane.showMessageDialog(null, "Tu aizej uz auto dīleri...", "Staigā", JOptionPane.INFORMATION_MESSAGE);
@@ -141,7 +141,10 @@ public class Vaditajs {
 					}
 					
 					String[] darbibas = {"Braukt ar šito", "Paga nē, gribu atpakaļ uz garāžu"};
-					String masinaDarbiba = (String)JOptionPane.showInputDialog(null,
+					//JOptionPane.showOptionDialog(null, "Izvēlieties darbību: ",
+						//	"Picerijas pasūtījumu programma", 0, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					int masinaDarbiba = -1;
+					masinaDarbiba = JOptionPane.showOptionDialog(null,
 							"Reku šitā mašīna:\n"
 							+ "Marka: "+currentMasinaRef.marka
 							+"\nModelis: "+currentMasinaRef.modelis
@@ -149,11 +152,11 @@ public class Vaditajs {
 							+"\nMaksimālais ātrums: "+currentMasinaRef.maxAtrums
 							+" km\\h\nAkselerācija: "+currentMasinaRef.incAtrums
 							+"(km\\h uz piespiedienu)\nNotreikti cilvēki: "+currentMasinaRef.notriektiCilv,
-							"Garāža", JOptionPane.QUESTION_MESSAGE, null,
+							"Garāža",0, JOptionPane.QUESTION_MESSAGE, null,
 						    darbibas, darbibas[0]);
-					if(masinaDarbiba == "Braukt ar šito")
+					if(masinaDarbiba == 0)
 						JOptionPane.showMessageDialog(null, "Šī funkcionalitāte nav īstenota vēl, ma fault.", "Kļūda", JOptionPane.ERROR_MESSAGE);
-					else if(masinaDarbiba == "Paga nē, gribu atpakaļ uz garāžu" || masinaDarbiba == null)
+					else
 						continue;
 					
 				}
