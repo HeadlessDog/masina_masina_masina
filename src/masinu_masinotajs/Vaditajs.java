@@ -58,7 +58,8 @@ public class Vaditajs {
 	public static void main(String[] args) {
 		String vieta = "dealer";
 		
-		String currentMasina = "NAV";
+		String currentMasinaName = "NAV";
+		masinka currentMasinaRef;
 		String[] visasVietas = { "dealer", "veikals", "garaza", "serviss", "uzcela"};
 		
 		String[] pieejMarkas = {"Fiat", "Opel", "Lamborghini", "Audi"};
@@ -99,7 +100,7 @@ public class Vaditajs {
 				darbibuOpcijas[masinuSk+1] = "Iet atpakaļ pie dīlera";
 				darbibuOpcijas[masinuSk] = "Pārtaisīt kādu mašīnu";
 					
-				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena), vari arī iet atpakāl pie dīlera", "Auto Dīleris", JOptionPane.INFORMATION_MESSAGE, null, darbibuOpcijas, darbibuOpcijas[0]);
+				String izvele = (String)JOptionPane.showInputDialog(null, "So, tu esi garāžā, reku tev te mašīnas (varbut ari nav neviena).\n Vari arī iet atpakāļ pie dīlera vai pārtaisīt kādu mašīnu.", "Auto Dīleris", JOptionPane.INFORMATION_MESSAGE, null, darbibuOpcijas, darbibuOpcijas[0]);
 				
 				if(izvele == "Iet atpakaļ pie dīlera") {
 					JOptionPane.showMessageDialog(null, "Tu aizej uz auto dīleri...", "Staigā", JOptionPane.INFORMATION_MESSAGE);
@@ -123,10 +124,36 @@ public class Vaditajs {
 					}
 					if(masinaIdx > -1) masinuVeidosana.parTaisitMasinu(masinaIdx, pieejKrasas);
 					continue;
-				}
-				else currentMasina = izvele;
 					
-				
+				}
+				else {
+					currentMasinaName = izvele;
+					currentMasinaRef = null;
+					for(int i=0;i<masinuSk;i++)
+						if((masinas.get(i).marka+" "+masinas.get(i).modelis).equals(currentMasinaName))
+							currentMasinaRef = masinas.get(i);
+					if(currentMasinaRef == null) {
+						JOptionPane.showMessageDialog(null, "Ļoti savāda kļūda, ja šo saņēmi vari justies īpašs!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+						continue;
+					}
+					
+					String[] darbibas = {"Braukt ar šito", "Paga nē, gribu atpakaļ uz garāžu"};
+					String masinaDarbiba = (String)JOptionPane.showInputDialog(null,
+							"Reku šitā mašīna:\n"
+							+ "Marka: "+currentMasinaRef.marka
+							+"\nModelis: "+currentMasinaRef.modelis
+							+"\nKrasa: "+currentMasinaRef.krasa
+							+"\nMaksimālais ātrums: "+currentMasinaRef.maxAtrums
+							+" km\\h\nAkselerācija: "+currentMasinaRef.incAtrums
+							+"(km\\h uz piespiedienu)\nNotreikti cilvēki: "+currentMasinaRef.notriektiCilv,
+							"Garāža", JOptionPane.QUESTION_MESSAGE, null,
+						    darbibas, darbibas[0]);
+					if(masinaDarbiba == "Braukt ar šito")
+						JOptionPane.showMessageDialog(null, "Šī funkcionalitāte nav īstenota vēl, ma fault.", "Kļūda", JOptionPane.ERROR_MESSAGE);
+					else if(masinaDarbiba == "Paga nē, gribu atpakaļ uz garāžu" || masinaDarbiba == null)
+						continue;
+					
+				}
 				break;
 			}
 		}while(true);

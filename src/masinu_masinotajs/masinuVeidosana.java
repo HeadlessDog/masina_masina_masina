@@ -42,6 +42,12 @@ public class masinuVeidosana {
 		
 		String modelis = Vaditajs.StringParb("Ievadi mašīnas modeli:");
 		
+		for(int i=0;i<Vaditajs.masinas.size();i++)
+			if(Vaditajs.masinas.get(i).marka.equals(marka) && Vaditajs.masinas.get(i).modelis.equals(modelis)) {
+				JOptionPane.showMessageDialog(null, "Sorry boss, nevar būt divas mašīnas ar vienādu marku un modeli!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		
 		Vaditajs.masinas.add(new masinka(marka, modelis, krasa, maxAtr, incAtr, 0));
 		
 	}
